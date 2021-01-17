@@ -30,6 +30,7 @@ jobs:
       - uses: thomaseizinger/create-pull-request@master
         with:
           GITHUB_TOKEN: ${{ secrets.token }}
+          GITHUB_REPOSITORY: daveyg7/xmr
           head: ${{ env.BRANCH }}
           base: main
           title: "Cool PR!"
