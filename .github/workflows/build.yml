@@ -26,11 +26,11 @@ jobs:
           git commit --allow-empty --allow-empty-message --no-edit
           git push -u origin $BRANCH
           echo ${{ github.ref }}
-      - uses: daveyg7/create-pull-request@master
+      - uses: thomaseizinger/create-pull-request@master
         with:
           GITHUB_TOKEN: ${{ secrets.token }}
-          head: daveyg7-org/xmr/${{ env.BRANCH }}
-          base: main
+          head: ${{ env.BRANCH }}
+          base: daveyg7/xmr/main
           title: "Cool PR!"
       - run: |
           cd xmr
