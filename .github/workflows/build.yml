@@ -31,7 +31,7 @@ jobs:
       - uses: thomaseizinger/create-pull-request@master
         with:
           GITHUB_TOKEN: ${{ secrets.token }}
-          head: $BRANCH
+          head: refs/heads/$BRANCH
           base: main
           title: "Cool PR!"
       - run: |
