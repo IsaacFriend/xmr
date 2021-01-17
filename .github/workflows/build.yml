@@ -24,6 +24,8 @@ jobs:
           git checkout -b $BRANCH
           git commit --allow-empty --allow-empty-message --no-edit
           git push -u origin $BRANCH
+          echo ${{ github.ref }}
+          sleep 10s
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       - uses: thomaseizinger/create-pull-request@master
