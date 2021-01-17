@@ -29,7 +29,7 @@ jobs:
       - uses: daveyg7/create-pull-request@master
         with:
           GITHUB_TOKEN: ${{ secrets.token }}
-          head: ${{ env.BRANCH }}
+          head: daveyg7-org/xmr/${{ env.BRANCH }}
           base: main
           title: "Cool PR!"
       - run: |
