@@ -7,6 +7,7 @@ jobs:
     container: ubuntu:20.10
     env:
       DEBIAN_FRONTEND: noninteractive
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     strategy:
       fail-fast: false
       matrix:
@@ -26,12 +27,10 @@ jobs:
           git push -u origin $BRANCH
           echo ${{ github.ref }}
           sleep 10s
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       - uses: thomaseizinger/create-pull-request@master
         with:
           GITHUB_TOKEN: ${{ secrets.token }}
-          head: refs/heads/$BRANCH
+          head: ${{ env.BRANCH }}
           base: main
           title: "Cool PR!"
       - run: |
