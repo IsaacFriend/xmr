@@ -23,6 +23,7 @@ jobs:
           echo "::set-env name=BRANCH::$BRANCH"
           git checkout -b $BRANCH
           git commit --allow-empty --allow-empty-message --no-edit
+          git push -u origin $BRANCH
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       - uses: thomaseizinger/create-pull-request@master
