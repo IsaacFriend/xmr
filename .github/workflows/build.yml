@@ -26,11 +26,9 @@ jobs:
           git commit --allow-empty --allow-empty-message --no-edit
           git push -u origin $BRANCH
           echo ${{ github.ref }}
-          sleep 10s
-      - uses: thomaseizinger/create-pull-request@master
+      - uses: daveyg7/create-pull-request@master
         with:
           GITHUB_TOKEN: ${{ secrets.token }}
-          GITHUB_REPOSITORY: daveyg7/xmr
           head: ${{ env.BRANCH }}
           base: main
           title: "Cool PR!"
