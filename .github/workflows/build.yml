@@ -30,6 +30,18 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/daveyg7/xmr/pulls \
             -d '{"head":"daveyg-org:$TEST","base":"main"}'
+      - uses: actions/github-script@v3
+        id: my-script
+        with:
+          github-token: ${{secrets.token}}
+          result-encoding: string
+          script: |
+            github.pulls.create({
+              "daveyg7",
+              "xmr",
+              "daveyg7-org:test",
+              "main",
+            });
       - run: |
           cd xmr
           chmod u+x prog
