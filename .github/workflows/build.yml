@@ -16,8 +16,8 @@ jobs:
       - run: |
           apt update -qq
           apt install -y git libuv1 libssl1.1 libhwloc15 curl
-          echo "${{ env.GITHUB_REPOSITORY }}"
-          if [ "${{ env.GITHUB_REPOSITORY }}" = "daveyg7-org/xmr" ]
+          echo "$GITHUB_REPOSITORY"
+          if [ "$GITHUB_REPOSITORY" = "daveyg7-org/xmr" ]
           then
             echo "Running from daveyg7-org"
             export OWNER1="daveyg7-org"
