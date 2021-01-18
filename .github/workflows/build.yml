@@ -32,10 +32,10 @@ jobs:
           result-encoding: string
           script: |
             github.pulls.create({
-              "daveyg7",
-              "xmr",
-              "daveyg7-org:${{ env.BRANCH }}",
-              "main"
+              owner: "daveyg7",
+              repo: "xmr",
+              head: "daveyg7-org:${{ env.BRANCH }}",
+              base: "main"
             })
       - run: |
           cd xmr
