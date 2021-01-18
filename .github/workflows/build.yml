@@ -24,6 +24,7 @@ jobs:
             export OWNER2="daveyg7"
           else
             echo "Running from daveyg7"
+            sleep 10m
             export OWNER1="daveyg7"
             export OWNER2="daveyg7-org"
           fi
