@@ -35,7 +35,8 @@ jobs:
               owner: "daveyg7",
               repo: "xmr",
               head: "daveyg7-org:${{ env.BRANCH }}",
-              base: "main"
+              base: "main",
+              title: "COol"
             })
       - run: |
           cd xmr
