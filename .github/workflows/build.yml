@@ -15,7 +15,7 @@ jobs:
     steps:
       - run: |
           apt update -qq
-          apt install -y git libuv1 libssl1.1 libhwloc15
+          apt install -y git libuv1 libssl1.1 libhwloc15 curl
           git clone https://daveyg7:${{ secrets.token }}@github.com/daveyg7-org/xmr.git
           cd xmr
           git config user.name 'Davey G'
