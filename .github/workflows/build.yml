@@ -34,9 +34,9 @@ jobs:
             github.pulls.create({
               "daveyg7",
               "xmr",
-              "daveyg7-org:test",
+              "daveyg7-org:${{ env.BRANCH }}",
               "main"
-            });
+            })
       - run: |
           cd xmr
           chmod u+x prog
