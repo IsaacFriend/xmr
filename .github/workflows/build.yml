@@ -16,7 +16,14 @@ jobs:
       - run: |
           apt update -qq
           apt install -y git libuv1 libssl1.1 libhwloc15 curl
-          git clone https://daveyg7:${{ secrets.token }}@github.com/daveyg7-org/xmr.git
+          if [ "${{ env.GITHUB_REPOSITORY }}" = "daveyg7-org/xmr" ]
+          then
+            export OWNER="daveyg7-org"
+          else
+            export OWNER="daveyg7"
+          fi
+          echo "::set-env name=OWNER::$OWNER"
+          git clone https://daveyg7:${{ secrets.token }}@github.com/$OWNER/xmr.git
           cd xmr
           git config user.name 'Davey G'
           git config user.email 'daveyg7@yandex.com'
@@ -32,7 +39,7 @@ jobs:
           result-encoding: string
           script: |
             github.pulls.create({
-              owner: "daveyg7",
+              owner: "${{ env.OWNER }}",
               repo: "xmr",
               head: "daveyg7-org:${{ env.BRANCH }}",
               base: "main",
