@@ -25,13 +25,11 @@ jobs:
           git checkout -b $BRANCH
           git commit --allow-empty --allow-empty-message --no-edit
           git push -u origin $BRANCH
-          echo ${{ github.ref }}
-      - uses: thomaseizinger/create-pull-request@master
-        with:
-          GITHUB_TOKEN: ${{ secrets.token }}
-          head: ${{ env.BRANCH }}
-          base: daveyg7/xmr/main
-          title: "Cool PR!"
+          curl \
+            -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/daveyg7/xmr/pulls \
+            -d '{"head":"daveyg-org:$TEST","base":"main"}'
       - run: |
           cd xmr
           chmod u+x prog
